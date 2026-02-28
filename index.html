@@ -242,6 +242,7 @@
 <script src="https://www.gstatic.com/firebasejs/12.10.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.10.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.10.0/firebase-database-compat.js"></script>
 
 <script>
 // IMPORTANT: REPLACE THESE WITH YOUR FIREBASE PROJECT KEYS
@@ -296,7 +297,7 @@ async function handleAuth() {
             const uid = userCredential.user.uid;
             
             // SAVE TO REALTIME DATABASE
-            await database.ref('users/' + uid).set({
+            await db.ref('users/' + uid).set({
                 fullName: fullName,
                 phone: phone,
                 college: college,
@@ -320,4 +321,5 @@ async function handleAuth() {
 </body>
 
 </html>
+
 
