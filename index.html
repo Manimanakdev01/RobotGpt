@@ -258,7 +258,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-const db = firebase.firestore();
+const db = firebase.database();
 
 const modal = document.getElementById("authModal");
 
@@ -291,17 +291,20 @@ async function handleAuth() {
 
             if(!fullName || !phone || !college) return alert("Please fill all student details");
 
+            // Create User in Auth
             const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+            const uid = userCredential.user.uid;
             
-            // Save data to Firestore
-            await db.collection("users").doc(userCredential.user.uid).set({
+            // SAVE TO REALTIME DATABASE
+            await database.ref('users/' + uid).set({
                 fullName: fullName,
                 phone: phone,
                 college: college,
                 email: email,
                 role: "student",
-                createdAt: firebase.firestore.Timestamp.now()
+                createdAt: firebase.database.ServerValue.TIMESTAMP
             });
+            
             alert("Account created successfully!");
         } else {
             await auth.signInWithEmailAndPassword(email, password);
@@ -317,3 +320,4 @@ async function handleAuth() {
 </body>
 
 </html>
+
