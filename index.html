@@ -151,7 +151,7 @@
 <body>
 
 <header>
-    <h1>RoboGpt</h1>
+    <h1>RobotGpt</h1>
     <nav>
         <a href="#">Home</a>
         <a href="#about">About</a>
@@ -259,7 +259,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-const db = firebase.database();
+const database = firebase.database();
 
 const modal = document.getElementById("authModal");
 
@@ -297,14 +297,14 @@ async function handleAuth() {
             const uid = userCredential.user.uid;
             
             // SAVE TO REALTIME DATABASE
-            await db.ref('users/' + uid).set({
+            await database.ref('users/' + uid).set({
                 fullName: fullName,
                 phone: phone,
                 college: college,
                 email: email,
                 role: "student",
                 createdAt: firebase.database.ServerValue.TIMESTAMP
-            });
+                });
             
             alert("Account created successfully!");
         } else {
@@ -321,5 +321,6 @@ async function handleAuth() {
 </body>
 
 </html>
+
 
 
